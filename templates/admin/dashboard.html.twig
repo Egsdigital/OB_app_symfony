@@ -1,2 +1,54 @@
 {% extends ea.templatePath('layout') %}
 
+
+
+{% block body_class 'page-content' %}
+
+{# deprecated 'The "page_title" block is deprecated, use "content_title" instead.' #}
+{% block page_title %}
+    <h1>Bienvenue !</h1>
+{% endblock %}
+
+{# deprecated 'The "page_content" block is deprecated, use "main" instead.' #}
+{% block page_content %}
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Gestion des salles</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="http://127.0.0.1:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CStructuresCrudController&menuIndex=6&submenuIndex=1" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Gestion des utilisateurs</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="http://127.0.0.1:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&menuIndex=1&submenuIndex=-1" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Gérer les partenaires</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Gérer les permissions</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
+
+{% block content_title %}{{ block('page_title') }}{% endblock %}
+
+{% block main %}{{ block('page_content') }}{% endblock %}

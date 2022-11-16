@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Partenaires;
+use App\Entity\Structures;
+use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -34,12 +38,27 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Orange Bleue Application');
+            ->setTitle('Orange Bleue website');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::section('Comptes utilisateurs',User::class);
+        yield MenuItem::subMenu('Les utilisateurs', 'fas fa-list', User::class)->setSubItems([
+            MenuItem::linkToCrud('add new user','fas fa-plus',User::class)->setAction(crud::PAGE_NEW),
+            MenuItem::linkToCrud('Visualiser les utilisateurs','fas fa-eye',User::class)
+
+        ]);
+        yield MenuItem::section('Franchise');
+        yield MenuItem::subMenu('Partenaires', 'fas fa-list', Partenaires::class)->setSubItems([
+            MenuItem::linkToCrud('Ajouter un nouveau partenaire','fas fa-plus',Partenaires::class)->setAction(crud::PAGE_NEW),
+            MenuItem::linkToCrud('Visualiser les partenaires','fas fa-eye',Partenaires::class)
+        ]);
+        yield MenuItem::section('Structures');
+        yield MenuItem::subMenu('Gérer les structures', 'fas fa-list', Structures::class)->setSubItems([
+            MenuItem::linkToCrud('Ajouter une nouvelle structure','fas fa-plus',Structures::class)->setAction(crud::PAGE_NEW),
+            MenuItem::linkToCrud('Visualiser les structures','fas fa-eye',Structures::class)
+        ]);
     }
 }
